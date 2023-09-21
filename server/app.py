@@ -18,9 +18,10 @@ db.init_app(app)
 def index():
     return '<h1>Bakery GET API</h1>'
 
-@app.route('/bakeries')
+@app.route('/bakeries' method=['GET'])
 def bakeries():
-    return ''
+    bakeries = Bakery.query.all()
+    return jsonify([bakery.to_dict() for bakery in bakeries])
 
 @app.route('/bakeries/<int:id>')
 def bakery_by_id(id):
